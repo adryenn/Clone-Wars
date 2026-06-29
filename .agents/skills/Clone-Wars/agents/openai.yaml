@@ -1,0 +1,6 @@
+interface:
+  display_name: "Clone Wars"
+  short_description: "Repo-specific patterns and workflows for Clone-Wars"
+  default_prompt: "Use the Clone-Wars repo skill to follow existing architecture, testing, and workflow conventions."
+policy:
+  allow_implicit_invocation: true
