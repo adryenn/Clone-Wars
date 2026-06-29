@@ -1,0 +1,62 @@
+# Trillion configuration. Edit values here; no code change needed.
+# (Tier 6: configuration over hardcoded values.)
+
+[agent]
+name = "Trillion"
+# Personality/tone from the interview. Folded into the system prompt.
+persona = "warm, plain-spoken, and brief"
+purpose = "a personal voice-first assistant that has my back"
+
+[model]
+# The brain. Swappable in one place (trillion/llm.py reads this).
+provider = "anthropic"
+name = "claude-opus-4-8"
+max_tokens = 2048
+temperature = 0.7
+# Rough USD per million tokens, for the cost tally in the audit log.
+input_cost_per_mtok = 5.0
+output_cost_per_mtok = 25.0
+
+[voice]
+# Tier 3. Only used when you run `trillion talk`.
+stt_provider = "deepgram"
+stt_model = "nova-2"
+tts_provider = "elevenlabs"
+# ElevenLabs voice id. "Rachel" (natural, neutral) by default — change freely.
+tts_voice_id = "21m00Tcm4TlvDq8ikWAM"
+tts_model = "eleven_turbo_v2_5"
+
+[safety]
+# Tier 6. Tools whose `consequence` is in this list must get an explicit yes
+# before they run. Read-only tools flow freely.
+confirm_consequences = ["send", "spend", "delete", "settings"]
+# Seconds a background confirmation waits for a human before timing out to the
+# safe default (do nothing, leave a note). Never block forever.
+confirm_timeout_seconds = 120
+
+[heartbeat]
+# Tier 5. The background loop.
+enabled = true
+tick_seconds = 30
+# Quiet hours: non-urgent items wait for waking hours. 24h local time.
+quiet_hours_start = 22
+quiet_hours_end = 8
+
+# Scheduled checks. Each runs every `interval_seconds`. `noteworthy` decides the
+# default surface level when a check fires: "log" (calm) or "interrupt" (loud).
+# Tune intervals and thresholds here — never in code.
+[[heartbeat.checks]]
+name = "due_reminders"
+interval_seconds = 60
+noteworthy = "interrupt"
+description = "Surface reminders whose time has arrived."
+
+[[heartbeat.checks]]
+name = "daily_summary"
+interval_seconds = 86400
+noteworthy = "log"
+description = "Once a day, summarize what's outstanding."
+
+[paths]
+# All durable state lives here. Git-ignored.
+state_dir = "trillion_state"

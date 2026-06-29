@@ -1,0 +1,30 @@
+# Secrets — never commit
+.env
+*.key
+secrets.toml
+
+# Trillion runtime state (local, machine-specific)
+trillion_state/
+*.log
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+build/
+dist/
+.venv/
+venv/
+env/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# OS / editor
+.DS_Store
+*.swp
+.idea/
+.vscode/
