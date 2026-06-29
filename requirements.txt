@@ -1,0 +1,14 @@
+# --- Tier 1: the brain ---
+anthropic>=0.40.0
+
+# --- Tier 3: voice (optional) ---
+# The text path runs without these. Install to enable push-to-talk:
+#   pip install -r requirements.txt        # core only by default
+# Uncomment to enable voice:
+# deepgram-sdk>=3.7.0      # speech-to-text
+# elevenlabs>=1.50.0       # text-to-speech
+# sounddevice>=0.4.6       # microphone capture + playback
+# numpy>=1.26.0            # audio buffers
+
+# --- Dev / tests ---
+# pytest>=8.0.0
